@@ -47,17 +47,17 @@ docker-compose down
 
 Make sure you have the following installed on your machine:
 
-    **Docker**
-    **Docker Compose**
+**Docker
+Docker Compose**
 
 ### Available Services
 
 The repository contains configuration files for the following services:
 
-    **Service 1: Traefik**
-    **Service 2: Semaphore (current & legacy)**
-    **Service 3: Jenkins**
-    **Service 4: Homepage**
+**Service 1: Traefik
+Service 2: Semaphore (current & legacy)
+Service 3: Jenkins
+Service 4: Homepage**
 
 ### Contributing
 
