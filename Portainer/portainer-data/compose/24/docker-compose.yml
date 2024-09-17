@@ -1,0 +1,54 @@
+services:
+  # uncomment this section and comment out the mysql section to use postgres instead of mysql
+  postgres:
+    restart: unless-stopped
+    image: postgres:14
+    hostname: postgres
+    volumes: 
+      - semaphore-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: semaphore
+      POSTGRES_PASSWORD: semaphore
+      POSTGRES_DB: semaphore
+    networks: 
+      - traefik-test_default
+
+  semaphore_leg:
+    container_name: semaphore_leg
+    restart: unless-stopped
+    networks: 
+      - traefik-test_default
+    ports:
+      - 3005:3000
+    image: semaphoreui/semaphore:v2.8.90
+    environment:
+      SEMAPHORE_DB_USER: semaphore
+      SEMAPHORE_DB_PASS: semaphore
+      SEMAPHORE_DB_HOST: postgres # for postgres, change to: postgres
+      SEMAPHORE_DB_PORT: 5432 # change to 5432 for postgres
+      SEMAPHORE_DB_DIALECT: postgres # for postgres, change to: postgres
+      SEMAPHORE_DB: semaphore
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      SEMAPHORE_ADMIN_PASSWORD: M4lP0rr0!
+      SEMAPHORE_ADMIN_NAME: admin
+      SEMAPHORE_ADMIN_EMAIL: jbaudo@garrahan.gov.ar
+      SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: dTa9RM0VBcDYlD/rjg/H5MZ6yycfUUwl4p0xBhdVveE=
+    depends_on:
+      - postgres # for postgres, change to: postgres
+    volumes:
+      - /etc/semaphore/requirements.txt:/etc/semaphore/requirements.txt
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.semaphorelegacy-http.entrypoints: "web"
+      traefik.http.routers.semaphorelegacy-http.rule: "Host(`automateleg.garrahan.gov.ar`)"
+      traefik.http.routers.semaphorelegacy-https.entrypoints: "websecure"
+      traefik.http.routers.semaphorelegacy-https.rule: "Host(`automateleg.garrahan.gov.ar`)"
+      traefik.http.routers.semaphorelegacy-https.tls: "true"
+      #traefik.http.routers.semaphore-https.tls.certresolver: "production"
+volumes:
+  semaphore-postgres: # to use postgres, switch to: semaphore-postgres
+
+networks:
+  traefik-test_default:
+    external: true

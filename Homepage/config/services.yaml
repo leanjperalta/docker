@@ -1,0 +1,95 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+# - My First Group:
+#     - My First Service:
+#         href: http://localhost/
+#         description: Homepage is awesome
+
+# - My Second Group:
+#     - My Second Service:
+#         href: http://localhost/
+#         description: Homepage is the best
+
+# - My Third Group:
+#     - My Third Service:
+#         href: http://localhost/
+#         description: Homepage is 😎
+- Contenedores:
+  - Portainer:
+        icon: portainer.png
+        href: https://172.16.20.71:9443
+        description: Administración contenedores docker
+        widget:
+            type: portainer
+            url: https://172.16.20.71:9443
+            env: 2
+            key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
+  - Relay:
+        icon:
+        description: Relay SMTP
+        server: relay
+        container: relay-mail-1
+        
+- Proxy:
+  - Traefik:
+        icon: traefik.png
+        href: http://172.16.20.71:8080
+        description: SSL Reverse proxy
+        widget:
+            type: traefik
+            url: http://172.16.20.71:8080
+            #username: username # optional
+            #password: password # optional
+
+- Deployment:
+  - Semaphore:
+        icon: semaphore.png
+        href: https://semaphore.garrahan.gov.ar
+        ping: https://semaphore.garrahan.gov.ar
+        statusStyle: dot
+        description: Ansible UI
+
+- Monitoreo & Logs:
+  - Observium:
+        icon: observium.png
+        href: http://monitor.garrahan.gov.ar
+        ping: http://monitor.garrahan.gov.ar
+        statusStyle: dot
+        description: Network Visibility
+  - Graylog:
+        icon: graylog.png
+        href: https://172.16.10.243:9000
+        ping: https://172.16.10.243:9000
+        statusStyle: dot
+        description: Gestión de logs centralizado
+  - Smokeping:
+        icon: smokeping.png
+        href: http://172.16.20.27/cgi-bin/smokeping.cgi
+        ping: http://172.16.20.27/cgi-bin/smokeping.cgi
+        statusStyle: dot
+        description: Monitor de performance de red
+
+- Redes:
+  - IPAM:
+        icon: phpipam.png
+        href: http://ipam.garrahan.gov.ar
+        ping: http://ipam.garrahan.gov.ar
+        statusStyle: dot
+        description: Gestión de IP
+  - NetDisco:
+        icon: /icons/netdisco_2.png
+        href: https://netdisco.garrahan.gov.ar/
+        ping: https://netdisco.garrahan.gov.ar/
+        statusStyle: dot
+        description: Gestión de redes
+  - Rconfig:
+        icon: mdi-backup-restore
+        href: https://rconfig.garrahan.gov.ar/login.php
+        ping: https://rconfig.garrahan.gov.ar/login.php
+        statusStyle: dot
+        description: Gestión de configuración
+
+
+

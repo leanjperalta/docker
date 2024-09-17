@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 4000:3000
+    env_file: .env
+    volumes:
+      - /opt/Homepage/config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/Homepage/icons:/app/public/icons
+#    environment: #en caso de usar otro usuario distinto a root
+#      PUID: $PUID
+#      PGID: $PGID
+    restart: unless-stopped

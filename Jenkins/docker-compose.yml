@@ -1,0 +1,73 @@
+networks:
+  jenkins:
+    external: true
+    name: "jenkins"
+
+services:
+  jenkins-blueocean:
+
+    container_name: "jenkins-blueocean"
+
+    entrypoint:
+      - "/usr/bin/tini"
+      - "--"
+      - "/usr/local/bin/jenkins.sh"
+
+    environment:
+      - "DOCKER_HOST=tcp://docker:2376"
+      - "DOCKER_CERT_PATH=/certs/client"
+      - "DOCKER_TLS_VERIFY=1"
+      - "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "LANG=C.UTF-8"
+      - "JENKINS_HOME=/var/jenkins_home"
+      - "JENKINS_SLAVE_AGENT_PORT=50000"
+      - "REF=/usr/share/jenkins/ref"
+      - "JENKINS_VERSION=2.414.2"
+      - "JENKINS_UC=https://updates.jenkins.io"
+      - "JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental"
+      - "JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals"
+      - "COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log"
+      - "JAVA_HOME=/opt/java/openjdk"
+
+    hostname: "5c64d4957e67"
+
+    image: "myjenkins-blueocean:2.414.2"
+
+    ipc: "private"
+
+    labels:
+      org.opencontainers.image.description: "The Jenkins Continuous Integration and Delivery server"
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "8fd8b2501b26373033e1d24dc7b357e87e3dd1f6"
+      org.opencontainers.image.source: "https://github.com/jenkinsci/docker"
+      org.opencontainers.image.title: "Official Jenkins Docker image"
+      org.opencontainers.image.url: "https://www.jenkins.io/"
+      org.opencontainers.image.vendor: "Jenkins project"
+      org.opencontainers.image.version: "2.414.2"
+
+    logging:
+      driver: "json-file"
+      options: {}
+
+    networks:
+      - "jenkins"
+
+    ports:
+      - "50000:50000/tcp"
+      - "8081:8080/tcp"
+
+    restart: "on-failure"
+
+    user: "jenkins"
+
+    volumes:
+      - "jenkins-data:/var/jenkins_home"
+      - "jenkins-docker-certs:/certs/client:ro"
+
+version: "3.6"
+
+volumes:
+  jenkins-data:
+    external: true
+  jenkins-docker-certs:
+    external: true
