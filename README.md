@@ -47,8 +47,8 @@ docker-compose down
 
 Make sure you have the following installed on your machine:
 
->Docker
->Docker Compose
+  Docker
+  Docker Compose
 
 ### Available Services
 
