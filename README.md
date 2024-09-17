@@ -8,35 +8,40 @@ To use the configuration files in this repository, follow these steps:
 ## 1. Clone the Repository
 
 First, clone the repository to your local machine using the following command:
+
 ```
 bash
 git clone https://github.com/leanjperalta/docker.git
-``
+```
 
 ## 2. Navigate to the Desired Service
 
 Each service has its own directory containing the relevant docker-compose.yml file. Navigate to the service you're interested in, for example:
 
+```
 bash
-
 cd docker/service-name
+``
 
 ## 3. Run Docker Compose
 
 To spin up the containers for the chosen service, use Docker Compose:
+
 ```
 bash
 docker-compose up -d
-``
+```
+
 This command will start the service in detached mode, running in the background.
 
 ## 4. Stopping the Services
 
 To stop the services and remove the containers, networks, and volumes created by Docker Compose, run:
+
 ```
 bash
 docker-compose down
-``
+```
 
 ### Prerequisites
 
