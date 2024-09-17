@@ -21,7 +21,7 @@ Each service has its own directory containing the relevant docker-compose.yml fi
 ```
 bash
 cd docker/service-name
-``
+```
 
 ## 3. Run Docker Compose
 
