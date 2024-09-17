@@ -62,6 +62,7 @@ The repository contains configuration files for the following services:
 ### Contributing
 
 Feel free to submit issues or pull requests if you'd like to contribute to this repository. Make sure to follow the contribution guidelines.
-License
+
+### License
 
 ***This repository is licensed under the MIT License. See the LICENSE file for more details.***
