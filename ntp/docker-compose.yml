@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ntp:
+    image: docker.io/cturra/ntp
+    container_name: ntp
+    read_only: true
+    restart: always
+    network_mode: "host"  
+    tmpfs:  # Allow writing only to these directories
+      - /etc/chrony:rw,mode=1750
+      - /run/chrony:rw,mode=1750
+      - /var/lib/chrony:rw,mode=1750
+    environment:
+      -  TZ=America/Argentina/Buenos_Aires
+#    volumes:
+#      - /home/lperalta/Docker/ntp/chrony.conf:/etc/chrony/chrony.conf:ro
+    cap_drop:
+      - ALL  # Evaluar dropear todo y luego adicionar solo lo necesario
+    cap_add:
+      - CAP_SYS_TIME
+      - CAP_NET_BIND_SERVICE 
+    command: -d -n -p "ip_adress":123:123/udp
